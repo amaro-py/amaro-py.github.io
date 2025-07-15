@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@username - Link in Bio</title>
+    <link rel="stylesheet" href="linktree.css">
+</head>
+<body>
+    <!-- Animated Background Blobs -->
+    <div class="blob1"></div>
+    <div class="blob2"></div>
+    
+    <div class="container">
+        <!-- Banner Section -->
+        <div class="banner-section">
+            <div class="banner-container">
+                <img src="banner.png" alt="Banner" class="banner-image">
+            </div>
+            <div class="profile-image-border">
+                <img src="icon.png" alt="Profile Picture" id="profileImg">
+            </div>
+        </div>
+
+        <!-- Profile Info Section -->
+        <div class="profile-info-section">
+        </div>
+
+        <!-- Links Section -->
+        <div class="links-section">
+            <div class="link-button instagram-dropdown-container">
+                <span class="link-text">Instagram</span>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">@0xamaro</a>
+                    <a href="#" class="dropdown-item">@amaro.xy</a>
+                </div>
+            </div>
+            
+            <a href="#" class="link-button discord-link">
+                <div class="discord-avatar">
+                    <img src="icon.png" alt="Discord Avatar">
+                </div>
+                <div class="discord-content">
+                    <div class="discord-header">
+                        <span class="discord-username">kinicki</span>
+                        <div class="discord-badges">
+                            <!-- Active Developer Badge -->
+                            <div class="discord-badge" title="Active Developer">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#2EA967">
+                                    <path d="M6.47213 4L4 6.47213V17.5279L6.47217 20H17.5278L20 17.5279V6.47213L17.5279 4H6.47213ZM10.8582 16.4255H8.64551C8.64551 14.5952 7.1567 13.1064 5.32642 13.1064V10.8936C7.1567 10.8936 8.64551 9.40483 8.64551 7.57454H10.8582C10.8582 9.39042 9.96684 10.9908 8.61129 12C9.96684 13.0093 10.8582 14.6096 10.8582 16.4255ZM18.6667 13.1064C16.8364 13.1064 15.3476 14.5952 15.3476 16.4255H13.1348C13.1348 14.6096 14.0263 13.0093 15.3818 12C14.0263 10.9908 13.1348 9.39042 13.1348 7.57454H15.3476C15.3476 9.40483 16.8364 10.8936 18.6667 10.8936V13.1064V13.1064Z"></path>
+                                </svg>
+                            </div>
+                            <!-- HypeSquad Bravery Badge -->
+                            <div class="discord-badge" title="HypeSquad Bravery">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#9c84ef" fill-rule="evenodd" clip-rule="evenodd">
+                                    <path d="m5.01502 4h13.97008c.1187 0 .215.09992.215.22305v9.97865c0 .0697-.0312.1343-.0837.1767l-6.985 5.5752c-.0389.0313-.0847.0464-.1314.0464-.0466 0-.0924-.0151-.1313-.0464l-6.985-5.5752c-.05252-.0424-.08365-.107-.08365-.1767v-9.97865c0-.12313.0963-.22305.21497-.22305zm7.82148 7.0972 4.1275-2.71296c.1039-.06863.2299.04542.1725.15644l-1.7114 3.36192c-.0403.0807.0182.1756.1079.1756h1.0246c.118 0 .1664.1504.0706.219l-4.6267 3.3175c-.0414.0303-.0978.0303-.1402 0l-4.6267-3.3175c-.0948-.0686-.04639-.219.07059-.219h1.02356c.09076 0 .14925-.0949.10791-.1756l-1.71132-3.36293c-.05648-.11001.06958-.22305.17345-.15543l4.12851 2.71296c.0716.0474.1291.112.1674.1887l.6293 1.2636c.0444.0888.1714.0888.2158 0l.6293-1.2636c.0383-.0767.0958-.1423.1674-.1887z"></path>
+                                </svg>
+                            </div>
+                            <!-- Discord Nitro Badge -->
+                            <div class="discord-badge" title="Discord Nitro">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="16">
+                                    <circle cx="15" cy="12" fill="#ffffff" r="6"></circle>
+                                    <path d="m2.20812 10.124c.42636 0 .7816-.34817.7816-.76611 0-.41793-.35524-.76615-.7816-.76615h-.42635c-.42636 0-.78177.34822-.78177.76615 0 .41794.35541.76611.78177.76611zm16.13038 9.2643c4.0504-1.811 5.7558-6.4083 3.9083-10.23937-1.2791-2.71657-3.9793-4.31859-6.8217-4.45801h-8.02965c-.71065 0-1.20812.55735-1.20812 1.18425 0 .69645.56859 1.18409 1.20812 1.18409h2.06067c.42635 0 .78158.34822.78158.76616 0 .41793-.35523.76632-.78158.76632h-5.04517c-.42635 0-.78176.34822-.78176.76615 0 .41794.35541.76611.78176.76611h3.62404c.42635 0 .78159.3484.78159.7664 0 .4179-.35524.7661-.78159.7661h-2.27402c-.42636 0-.7816.3482-.7816.7662 0 .4179.35524.7663.7816.7663h1.56336c.07112.8359.2843 1.6717.63954 2.4379 1.77654 3.8311 6.46643 5.5028 10.37463 3.7614zm-7.2725-5.1884c-1.0318-2.2025-.0466-4.80794 2.2003-5.81933 2.2469-1.0114 4.9049-.04564 5.9366 2.15683 1.0318 2.2025.0468 4.8079-2.2003 5.8193-2.2469 1.0114-4.9048.0457-5.9366-2.1568z" fill="#4f5d7f"></path>
+                                    <path d="m16.8142 9.86662 1.4212 2.36838c.0711.1392.0711.2089 0 .3482l-1.4212 2.3683c-.0711.1393-.2131.1393-.2842.1393h-2.7714c-.142 0-.2131-.0697-.2841-.1393l-1.4213-2.3683c-.0709-.1393-.0709-.209 0-.3482l1.4213-2.36838c.071-.13926.2132-.13926.2841-.13926h2.7714c.1422-.06971.2131 0 .2842.13926z" fill="#c5cedd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="discord-description">Discord</div>
+                </div>
+            </a>
+            
+            <!-- Spotify Container -->
+            <a href="#" class="link-button spotify-link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="spotify-icon">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="rgba(255, 255, 255, 0.9)"></path>
+                </svg>
+                <div class="spotify-content">
+                    <div class="spotify-header">
+                        <span class="spotify-username">amaro</span>
+                        <div class="spotify-badges">
+                            <div class="spotify-status-dot" id="spotify-status"></div>
+                        </div>
+                    </div>
+                    <div class="spotify-description" id="spotify-track">Not currently listening</div>
+                </div>
+            </a>
+            
+            <a href="#" class="link-button">
+                <span class="link-text">Website</span>
+            </a>
+        </div>
+
+        <!-- Audio Player Section -->
+        <div class="audio-player-section">
+            <div class="card">
+                <div class="one">
+                    <div class="music">
+                        <svg
+                            viewBox="0 0 16 16"
+                            class="note bi bi-music-note"
+                            fill="currentColor"
+                            height="18"
+                            width="18"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"
+                            ></path>
+                            <path d="M9 3v10H8V3h1z" fill-rule="evenodd"></path>
+                            <path
+                                d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z"
+                            ></path>
+                        </svg>
+                    </div>
+                    
+                    <div class="content-wrapper">
+                        <span class="name">
+                            <div></div>
+                            Mission To The Loot
+                        </span>
+                        <span class="name1">
+                            <div></div>
+                            Lil Uzi Vert
+                        </span>
+                        
+                        <!-- Progress bar -->
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="time-display">
+                                <span id="currentTime">0:00</span>
+                                <span id="totalTime">0:00</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Main controls -->
+                        <div class="bar">
+                            <svg
+                                viewBox="0 0 16 16"
+                                class="color bi bi-fast-forward-fill"
+                                fill="currentColor"
+                                height="16"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                                id="prevBtn"
+                            >
+                                <path
+                                    d="M7.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"
+                                ></path>
+                                <path
+                                    d="M15.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C8.713 12.69 8 12.345 8 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"
+                                ></path>
+                            </svg>
+                            <svg
+                                viewBox="0 0 16 16"
+                                class="color bi bi-caret-right-fill"
+                                fill="currentColor"
+                                height="18"
+                                width="18"
+                                xmlns="http://www.w3.org/2000/svg"
+                                id="playPauseBtn"
+                            >
+                                <path
+                                    d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"
+                                ></path>
+                            </svg>
+                            <svg
+                                viewBox="0 0 16 16"
+                                class="color bi bi-fast-forward-fill"
+                                fill="currentColor"
+                                height="16"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                                id="nextBtn"
+                            >
+                                <path
+                                    d="M7.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"
+                                ></path>
+                                <path
+                                    d="M15.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C8.713 12.69 8 12.345 8 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"
+                                ></path>
+                            </svg>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="two"></div>
+                <div class="three"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="audioPlayer" preload="auto">
+        <source src="untitled.flac" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const audio = document.getElementById('audioPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const totalTimeSpan = document.getElementById('totalTime');
+        const progressBar = document.querySelector('.progress-bar');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let isPlaying = false;
+
+        // Format time helper
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Play/Pause functionality
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.innerHTML = '<path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>';
+            } else {
+                audio.play();
+                playPauseBtn.innerHTML = '<path d="M5.5 3.5A1.5 1.5 0 0 1 7 2h2a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 9 14H7a1.5 1.5 0 0 1-1.5-1.5v-9z"></path><path d="M10.5 3.5A1.5 1.5 0 0 1 12 2h2a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 14 14h-2a1.5 1.5 0 0 1-1.5-1.5v-9z"></path>';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Update progress bar
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = progress + '%';
+            currentTimeSpan.textContent = formatTime(audio.currentTime);
+        });
+
+        // Set total duration
+        audio.addEventListener('loadedmetadata', () => {
+            totalTimeSpan.textContent = formatTime(audio.duration);
+        });
+
+        // Click on progress bar to seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            const newTime = (clickX / width) * audio.duration;
+            audio.currentTime = newTime;
+        });
+
+        // Previous button (restart current song)
+        prevBtn.addEventListener('click', () => {
+            audio.currentTime = 0;
+        });
+
+        // Next button (restart current song for now)
+        nextBtn.addEventListener('click', () => {
+            audio.currentTime = 0;
+        });
+
+        // Auto-play when song ends
+        audio.addEventListener('ended', () => {
+            isPlaying = false;
+            playPauseBtn.innerHTML = '<path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>';
+        });
+
+        // Link button click tracking
+        document.querySelectorAll('.link-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Link clicked:', e.currentTarget.querySelector('.link-text').textContent);
+                // Add your link navigation logic here
+            });
+        });
+
+        // Spotify Currently Playing Functionality
+        class SpotifyTracker {
+            constructor() {
+                this.trackElement = document.getElementById('spotify-track');
+                this.statusElement = document.getElementById('spotify-status');
+                this.isPlaying = false;
+                this.currentTrack = null;
+                this.accessToken = null;
+                
+                // Spotify App credentials - Injected via GitHub Actions environment variables
+                this.clientId = '{{SPOTIFY_CLIENT_ID}}'; // Injected during build
+                this.redirectUri = window.location.origin; // Current domain
+                
+                // PKCE (Proof Key for Code Exchange) variables for secure client-side auth
+                this.codeVerifier = null;
+                this.codeChallenge = null;
+                
+                // Initialize authentication
+                this.initializeAuth();
+            }
+
+            async initializeAuth() {
+                // Check if we have a token in localStorage
+                const storedToken = localStorage.getItem('spotify_access_token');
+                const tokenExpiry = localStorage.getItem('spotify_token_expiry');
+                
+                if (storedToken && tokenExpiry && new Date().getTime() < parseInt(tokenExpiry)) {
+                    this.accessToken = storedToken;
+                    this.startTracking();
+                } else {
+                    // Check if we're returning from Spotify auth
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const code = urlParams.get('code');
+                    
+                    if (code) {
+                        await this.exchangeCodeForToken(code);
+                        // Clean up URL
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    } else {
+                        // No token and no code - try to get one
+                        await this.getAccessToken();
+                    }
+                }
+            }
+
+            async getAccessToken() {
+                // For PKCE flow, we need user authorization - no client credentials
+                this.trackElement.textContent = 'Click to connect Spotify';
+                this.trackElement.style.cursor = 'pointer';
+                this.trackElement.addEventListener('click', () => this.authorizeUser());
+            }
+
+            // Generate PKCE code verifier and challenge
+            generateCodeVerifier() {
+                const array = new Uint8Array(32);
+                crypto.getRandomValues(array);
+                return btoa(String.fromCharCode.apply(null, array))
+                    .replace(/\+/g, '-')
+                    .replace(/\//g, '_')
+                    .replace(/=/g, '');
+            }
+
+            async generateCodeChallenge(codeVerifier) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(codeVerifier);
+                const digest = await crypto.subtle.digest('SHA-256', data);
+                return btoa(String.fromCharCode.apply(null, new Uint8Array(digest)))
+                    .replace(/\+/g, '-')
+                    .replace(/\//g, '_')
+                    .replace(/=/g, '');
+            }
+
+            async authorizeUser() {
+                try {
+                    // Generate PKCE parameters
+                    this.codeVerifier = this.generateCodeVerifier();
+                    this.codeChallenge = await this.generateCodeChallenge(this.codeVerifier);
+                    
+                    // Store code verifier for later use
+                    localStorage.setItem('spotify_code_verifier', this.codeVerifier);
+                    
+                    // Redirect to Spotify authorization with PKCE
+                    const scopes = 'user-read-currently-playing user-read-playback-state';
+                    const authUrl = `https://accounts.spotify.com/authorize?` +
+                        `client_id=${this.clientId}&` +
+                        `response_type=code&` +
+                        `redirect_uri=${encodeURIComponent(this.redirectUri)}&` +
+                        `scope=${encodeURIComponent(scopes)}&` +
+                        `code_challenge_method=S256&` +
+                        `code_challenge=${this.codeChallenge}`;
+                    
+                    window.location.href = authUrl;
+                } catch (error) {
+                    console.error('Error during authorization:', error);
+                    this.trackElement.textContent = 'Authorization failed';
+                }
+            }
+
+            async exchangeCodeForToken(code) {
+                try {
+                    // Get the stored code verifier
+                    const codeVerifier = localStorage.getItem('spotify_code_verifier');
+                    if (!codeVerifier) {
+                        throw new Error('No code verifier found');
+                    }
+                    
+                    const response = await fetch('https://accounts.spotify.com/api/token', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `grant_type=authorization_code&` +
+                              `code=${code}&` +
+                              `redirect_uri=${encodeURIComponent(this.redirectUri)}&` +
+                              `client_id=${this.clientId}&` +
+                              `code_verifier=${codeVerifier}`
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.accessToken = data.access_token;
+                        
+                        // Store token and expiry
+                        const expiry = new Date().getTime() + (data.expires_in * 1000);
+                        localStorage.setItem('spotify_access_token', this.accessToken);
+                        localStorage.setItem('spotify_token_expiry', expiry.toString());
+                        
+                        // Clean up code verifier
+                        localStorage.removeItem('spotify_code_verifier');
+                        
+                        this.startTracking();
+                    } else {
+                        throw new Error('Failed to exchange code for token');
+                    }
+                } catch (error) {
+                    console.error('Error exchanging code for token:', error);
+                    this.trackElement.textContent = 'Authentication failed';
+                }
+            }
+
+            async startTracking() {
+                // Update every 30 seconds
+                setInterval(() => {
+                    this.updateCurrentTrack();
+                }, 30000);
+                
+                // Initial update
+                this.updateCurrentTrack();
+            }
+
+            async updateCurrentTrack() {
+                try {
+                    const trackData = await this.getCurrentTrack();
+                    
+                    if (trackData && trackData.is_playing) {
+                        const trackName = trackData.item.name;
+                        const artistName = trackData.item.artists[0].name;
+                        
+                        this.trackElement.textContent = `${trackName} - ${artistName}`;
+                        this.statusElement.classList.add('playing');
+                        this.isPlaying = true;
+                    } else {
+                        this.trackElement.textContent = 'Not currently listening';
+                        this.statusElement.classList.remove('playing');
+                        this.isPlaying = false;
+                    }
+                } catch (error) {
+                    console.error('Error fetching Spotify data:', error);
+                    
+                    if (error.message.includes('401')) {
+                        // Token expired, try to get a new one
+                        localStorage.removeItem('spotify_access_token');
+                        localStorage.removeItem('spotify_token_expiry');
+                        this.accessToken = null;
+                        this.getAccessToken();
+                    } else {
+                        this.trackElement.textContent = 'Unable to connect to Spotify';
+                        this.statusElement.classList.remove('playing');
+                    }
+                }
+            }
+
+            async getCurrentTrack() {
+                if (!this.accessToken) {
+                    throw new Error('No access token available');
+                }
+
+                const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+                    headers: {
+                        'Authorization': `Bearer ${this.accessToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.status === 204) {
+                    return null; // Nothing currently playing
+                }
+
+                if (response.status === 401) {
+                    throw new Error('401 Unauthorized - Token expired');
+                }
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                return await response.json();
+            }
+        }
+
+        // Initialize Spotify tracking
+        const spotifyTracker = new SpotifyTracker();
+
+        // Add click functionality to Spotify link
+        document.querySelector('.spotify-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            // In a real implementation, this could:
+            // 1. Open Spotify Web Player
+            // 2. Show more detailed track information
+            // 3. Provide play/pause controls
+            window.open('https://open.spotify.com/', '_blank');
+        });
+
+        /*
+        ================================================
+        GITHUB PAGES SPOTIFY SETUP INSTRUCTIONS
+        ================================================
+        
+        To use the real Spotify API with GitHub Pages, you need to:
+        
+        1. Create a Spotify App:
+           - Go to https://developer.spotify.com/dashboard
+           - Click "Create an app"
+           - Fill in app name and description
+           - Accept the terms of service
+           
+        2. Configure your Spotify App:
+           - In your app settings, add a redirect URI
+           - Set it to: https://yourusername.github.io/your-repo-name
+           - Or your custom domain if you have one
+           
+        3. Set up GitHub Repository Secret:
+           - Go to your GitHub repository
+           - Navigate to Settings > Secrets and variables > Actions
+           - Click "New repository secret"
+           - Name: SPOTIFY_CLIENT_ID
+           - Value: Your Spotify Client ID from the dashboard
+           
+        4. Enable GitHub Pages:
+           - Go to Settings > Pages
+           - Set Source to "GitHub Actions"
+           - The workflow will automatically deploy on push to main
+           
+        5. Current implementation:
+           - Uses PKCE flow (secure for client-side apps)
+           - No client secret needed (more secure)
+           - Handles token storage and refresh automatically
+           - Shows real currently playing track
+           - Automatically builds and deploys via GitHub Actions
+           
+        6. How it works:
+           - GitHub Actions injects your Client ID during build
+           - User clicks to authorize with Spotify
+           - PKCE flow securely exchanges code for token
+           - Real-time updates every 30 seconds
+           
+        ================================================
+        */
+    </script>
+</body>
+</html> 

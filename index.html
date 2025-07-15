@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- From Uiverse.io by Tsiangana --> 
+    <div class="card">
+    <div class="one">
+      <div class="music">
+        <svg
+          viewBox="0 0 16 16"
+          class="note bi bi-music-note"
+          fill="currentColor"
+          height="18"
+          width="18"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"
+          ></path>
+          <path d="M9 3v10H8V3h1z" fill-rule="evenodd"></path>
+          <path
+            d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z"
+          ></path>
+        </svg>
+      </div>
+            
+            <div class="content-wrapper">
+                <span class="name">
+                    <div></div>
+                    Mission To The Loot
+                </span>
+                <span class="name1">
+                    <div></div>
+                    Lil Uzi Vert
+                </span>
+                
+                <!-- Progress bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span>
+                        <span id="totalTime">0:00</span>
+                    </div>
+                </div>
+                
+                <!-- Main controls -->
+      <div class="bar">
+        <svg
+          viewBox="0 0 16 16"
+          class="color bi bi-fast-forward-fill"
+          fill="currentColor"
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+                        id="prevBtn"
+        >
+          <path
+            d="M7.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"
+          ></path>
+          <path
+            d="M15.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C8.713 12.69 8 12.345 8 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"
+          ></path>
+        </svg>
+        <svg
+          viewBox="0 0 16 16"
+          class="color bi bi-caret-right-fill"
+          fill="currentColor"
+          height="18"
+          width="18"
+          xmlns="http://www.w3.org/2000/svg"
+                        id="playPauseBtn"
+        >
+          <path
+            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"
+          ></path>
+        </svg>
+        <svg
+          viewBox="0 0 16 16"
+          class="color bi bi-fast-forward-fill"
+          fill="currentColor"
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+                        id="nextBtn"
+        >
+          <path
+            d="M7.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"
+          ></path>
+          <path
+            d="M15.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C8.713 12.69 8 12.345 8 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"
+          ></path>
+        </svg>
+      </div>
+                
+
+      </div>
+    </div>
+    <div class="two"></div>
+    <div class="three"></div>
+  </div>
+
+    <!-- Audio element -->
+    <audio id="audioPlayer" preload="auto">
+        <source src="uzi.m4a" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const audio = document.getElementById('audioPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const totalTimeSpan = document.getElementById('totalTime');
+        const progressBar = document.querySelector('.progress-bar');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let isPlaying = false;
+
+        // Format time helper
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Play/Pause functionality
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.innerHTML = '<path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>';
+            } else {
+                audio.play();
+                playPauseBtn.innerHTML = '<path d="M5.5 3.5A1.5 1.5 0 0 1 7 2h2a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 9 14H7a1.5 1.5 0 0 1-1.5-1.5v-9z"></path><path d="M10.5 3.5A1.5 1.5 0 0 1 12 2h2a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 14 14h-2a1.5 1.5 0 0 1-1.5-1.5v-9z"></path>';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Update progress bar
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = progress + '%';
+            currentTimeSpan.textContent = formatTime(audio.currentTime);
+        });
+
+        // Set total duration
+        audio.addEventListener('loadedmetadata', () => {
+            totalTimeSpan.textContent = formatTime(audio.duration);
+        });
+
+        // Click on progress bar to seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            const newTime = (clickX / width) * audio.duration;
+            audio.currentTime = newTime;
+        });
+
+        // Previous button (restart current song)
+        prevBtn.addEventListener('click', () => {
+            audio.currentTime = 0;
+        });
+
+        // Next button (restart current song for now)
+        nextBtn.addEventListener('click', () => {
+            audio.currentTime = 0;
+        });
+
+
+
+        // Auto-play when song ends
+        audio.addEventListener('ended', () => {
+            isPlaying = false;
+            playPauseBtn.innerHTML = '<path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>';
+        });
+    </script>
+</body>
+</html>
+  

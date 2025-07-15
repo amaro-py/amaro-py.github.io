@@ -1,0 +1,1166 @@
+/* Custom Font */
+@font-face {
+  font-family: 'CustomFont';
+  src: url('font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Linktree Copy Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: rgba(37,75,182,255);
+  font-family: 'CustomFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  color: #333;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(55, 81, 197);
+  z-index: 1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(64px);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Animated Background Blobs */
+.blob1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(179, 197, 255, 0.459) 0%, rgba(96, 165, 250, 0) 70%);
+  animation: blob1 20s infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.blob2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(100, 151, 246, 0.7) 0%, rgba(59, 130, 246, 0) 70%);
+  animation: blob2 25s infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Keyframe Animations */
+@keyframes blob1 {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1); 
+  }
+  25% { 
+    transform: translate(20%, 20%) scale(1.1); 
+  }
+  50% { 
+    transform: translate(-20%, 10%) scale(0.9); 
+  }
+  75% { 
+    transform: translate(10%, -20%) scale(1.05); 
+  }
+}
+
+@keyframes blob2 {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1); 
+  }
+  25% { 
+    transform: translate(-20%, -15%) scale(1.1); 
+  }
+  50% { 
+    transform: translate(15%, 25%) scale(0.9); 
+  }
+  75% { 
+    transform: translate(-15%, 10%) scale(1.05); 
+  }
+}
+
+.container {
+  max-width: 480px;
+  width: 100%;
+  padding: 0 32px 32px 32px; /* No top padding, banner will be at the top */
+  padding-top: 150px; /* Reduced since we removed the username text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  z-index: 10;
+  background: rgba(30, 64, 175, 0.3);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgb(147, 197, 253);
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 15px 5px rgba(59, 130, 246, 0.3);
+}
+
+/* Banner Section */
+.banner-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px; /* Reduced from 200px */
+  z-index: 15;
+}
+
+.banner-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 8px 8px 0 0; /* Only round top corners to match container */
+  overflow: hidden;
+  background: rgba(30, 64, 175, 0.2);
+  backdrop-filter: blur(8px);
+  border: none; /* Remove border so it touches container borders */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.banner-container:hover {
+  background: rgba(30, 64, 175, 0.25);
+}
+
+.banner-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px 8px 0 0; /* Match container border radius */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.banner-container:hover .banner-image {
+  transform: scale(1.02);
+}
+
+/* Profile Image at Banner Border */
+.profile-image-border {
+  position: absolute;
+  top: 70px; /* Adjusted for smaller icon size (120px - 50px for half overlap) */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px; /* Reduced from 120px */
+  height: 100px; /* Reduced from 120px */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(147, 197, 253, 0.5); /* Updated to match container outlines */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 8px 2px rgba(59, 130, 246, 0.15); /* Updated to match container styling */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  z-index: 15; /* Reduced so text can appear on top */
+  background: rgba(30, 64, 175, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.profile-image-border:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 15px 3px rgba(59, 130, 246, 0.3); /* Updated hover effect */
+  border: 1px solid rgba(147, 197, 253, 0.8); /* Updated hover border */
+  transform: translateX(-50%) scale(1.05);
+}
+
+.profile-image-border img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Profile Info Section */
+.profile-info-section {
+  text-align: center;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 25; /* Ensure text appears above icon */
+}
+
+.username {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bio {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* Links Section */
+.links-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px;
+  background: transparent;
+  border-radius: 6px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.link-button:hover {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+  background: rgba(147, 197, 253, 0.08);
+  border: 1px solid rgba(147, 197, 253, 0.8);
+  color: rgba(255, 255, 255, 1);
+}
+
+.link-button:active {
+  transform: translateY(0);
+}
+
+.link-icon {
+  font-size: 18px;
+}
+
+.link-text {
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Discord Link Styling - uses existing link-button base */
+.discord-link {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start !important;
+  gap: 12px;
+  padding: 12px 16px !important;
+}
+
+.discord-avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.discord-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bot-badge {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(30, 64, 175, 0.3);
+  border-radius: 50%;
+  background: rgba(30, 64, 175, 0.1);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.bot-badge-svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.discord-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.discord-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.discord-username {
+  font-size: 16px;
+  font-weight: 525;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.discord-badges {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.badge-icon {
+  font-size: 12px;
+}
+
+.discord-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.discord-badge:hover {
+  transform: scale(1.1);
+}
+
+.discord-badge svg {
+  display: block;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #3ba55d;
+  border-radius: 50%;
+}
+
+.discord-description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.discord-button {
+  background: rgba(147, 197, 253, 0.2);
+  border: 1px solid rgba(147, 197, 253, 0.4);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  backdrop-filter: blur(4px);
+}
+
+.discord-link:hover .discord-button {
+  background: rgba(147, 197, 253, 0.3);
+  border: 1px solid rgba(147, 197, 253, 0.6);
+  transform: scale(1.05);
+}
+
+/* Audio Player Section */
+.audio-player-section {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.now-playing-label {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Audio Player Styles (from original styles.css) */
+.card {
+  width: 100%;
+  max-width: 350px;
+  height: 120px;
+  background: rgba(30, 64, 175, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 8px 2px rgba(59, 130, 246, 0.15);
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 15px 3px rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(147, 197, 253, 0.8);
+}
+
+.card .one {
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  position: absolute;
+  background: transparent;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.card .one .music {
+  width: 80px;
+  height: 80px;
+  background: rgba(30, 64, 175, 0.15);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(147, 197, 253, 0.4);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+}
+
+.card .one .music:hover {
+  border: 1px solid rgba(147, 197, 253, 0.7);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+}
+
+.card .one .name {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 1px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card .one .name1 {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 6px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-container {
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 9px;
+  background: rgba(30, 64, 175, 0.3);
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 6px;
+  transition: all 0.3s ease;
+}
+
+.progress-bar:hover {
+  border: 1px solid rgba(147, 197, 253, 0.6);
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.15);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(147, 197, 253, 0.8), rgba(59, 130, 246, 0.9));
+  border-radius: 6px;
+  width: 0%;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card .one .bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  cursor: pointer;
+  margin-top: -2px;
+}
+
+.card .one .bar .color {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.8);
+  stroke-width: 1;
+  transition: stroke 0.2s ease, transform 0.2s ease;
+}
+
+.card .one .bar .color:hover {
+  stroke: rgba(147, 197, 253, 1);
+  transform: scale(1.1);
+}
+
+.card .one .bar .bi:first-child {
+  transform: rotate(180deg);
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+@keyframes one {
+  0% {
+    top: 10px;
+    left: 15px;
+  }
+  20% {
+    top: 30px;
+    left: 25px;
+  }
+  40% {
+    top: 50px;
+    left: 35px;
+  }
+  50% {
+    top: 30px;
+    left: 25px;
+  }
+  60% {
+    top: 20px;
+    left: 50px;
+  }
+  80% {
+    top: 40px;
+    left: 40px;
+  }
+  100% {
+    top: 10px;
+    left: 15px;
+  }
+}
+
+@keyframes two {
+  0% {
+    top: 10px;
+    right: 15px;
+  }
+  20% {
+    top: 30px;
+    right: 25px;
+  }
+  40% {
+    top: 50px;
+    right: 35px;
+  }
+  50% {
+    top: 30px;
+    right: 25px;
+  }
+  60% {
+    top: 20px;
+    right: 50px;
+  }
+  80% {
+    top: 40px;
+    right: 40px;
+  }
+  100% {
+    top: 10px;
+    right: 15px;
+  }
+}
+
+/* Banner separator line - complete line under icon */
+.banner-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(147, 197, 253, 0.5);
+  z-index: 5; /* Under the icon */
+}
+
+/* Responsive Design */
+@media (max-width: 520px) {
+  body {
+    padding: 16px;
+  }
+  
+  .container {
+    padding: 0 24px 24px 24px;
+    padding-top: 80px; /* Reduced since we removed the username text */
+    gap: 30px;
+    max-width: 100%; /* Ensure full width usage on mobile */
+  }
+  
+  .banner-section {
+    height: 100px; /* Reduced from 180px */
+  }
+  
+  .banner-container {
+    height: 100px; /* Explicit height for mobile */
+  }
+  
+  .username {
+    font-size: 22px;
+  }
+  
+  .bio {
+    font-size: 14px;
+  }
+  
+  .link-button {
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+  
+  /* Discord link mobile adjustments */
+  .discord-link {
+    padding: 10px 14px !important;
+  }
+  
+  .discord-avatar {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .bot-badge {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(30, 64, 175, 0.3);
+    bottom: -26px;
+  }
+  
+  .discord-username {
+    font-size: 15px;
+  }
+  
+  .discord-badge {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .discord-badge svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .discord-description {
+    font-size: 12px;
+  }
+  
+  .discord-button {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  
+  /* Instagram dropdown mobile adjustments */
+  .dropdown-item {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  
+  /* Spotify mobile adjustments */
+  .spotify-link {
+    padding: 10px 14px !important;
+  }
+  
+  .spotify-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .spotify-username {
+    font-size: 15px;
+  }
+  
+  .spotify-description {
+    font-size: 12px;
+  }
+  
+  .spotify-button {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  
+  .card {
+    height: 110px;
+    max-width: 100%;
+  }
+  
+  .card .one {
+    padding: 16px;
+  }
+  
+  .card .one .music {
+    width: 70px;
+    height: 70px;
+    margin-right: 16px;
+  }
+
+  
+  .profile-image-border {
+    width: 85px; /* Reduced from 100px */
+    height: 85px; /* Reduced from 100px */
+    top: 57px; /* Adjusted for smaller icon (100px - 42.5px for half overlap) */
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    padding: 12px;
+  }
+  
+  .container {
+    padding: 0 20px 20px 20px;
+    padding-top: 70px; /* Reduced since we removed the username text */
+    gap: 25px;
+    max-width: 100%; /* Ensure full width usage on small screens */
+  }
+  
+  .banner-section {
+    height: 80px; /* Reduced from 160px */
+  }
+  
+  .banner-container {
+    height: 80px; /* Explicit height for small screens */
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .username {
+    font-size: 20px;
+  }
+  
+  .link-button {
+    padding: 12px 16px;
+    font-size: 14px;
+    min-height: 48px; /* Ensure touch-friendly button height */
+  }
+  
+  /* Discord link small screen adjustments */
+  .discord-link {
+    padding: 8px 12px !important;
+  }
+  
+  .discord-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .bot-badge {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(30, 64, 175, 0.3);
+    bottom: -24px;
+  }
+  
+  .discord-username {
+    font-size: 14px;
+  }
+  
+  .discord-badge {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .discord-badge svg {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .discord-description {
+    font-size: 11px;
+  }
+  
+  .discord-button {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+  
+  /* Instagram dropdown small screen adjustments */
+  .dropdown-item {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  /* Spotify small screen adjustments */
+  .spotify-link {
+    padding: 8px 12px !important;
+  }
+  
+  .spotify-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .spotify-username {
+    font-size: 14px;
+  }
+  
+  .spotify-description {
+    font-size: 11px;
+  }
+  
+  .spotify-button {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+  
+  .card {
+    height: 100px;
+    max-width: 100%;
+  }
+  
+  .card .one {
+    padding: 14px;
+  }
+  
+  .card .one .music {
+    width: 60px;
+    height: 60px;
+    margin-right: 14px;
+  }
+
+  
+  .profile-image-border {
+    width: 75px; /* Reduced from 90px */
+    height: 75px; /* Reduced from 90px */
+    top: 42px; /* Adjusted for smaller icon (80px - 37.5px for half overlap) */
+  }
+  
+  /* Improve touch targets and spacing on very small screens */
+  .links-section {
+    gap: 12px;
+  }
+  
+  .audio-player-section {
+    margin-top: 5px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+  body {
+    padding: 10px;
+  }
+  
+  .container {
+    padding: 0 16px 16px 16px;
+    padding-top: 60px; /* Reduced since we removed the username text */
+    gap: 20px;
+  }
+  
+  .banner-section {
+    height: 70px;
+  }
+  
+  .banner-container {
+    height: 70px; /* Explicit height for extra small screens */
+  }
+  
+  .profile-image-border {
+    width: 70px; /* Reduced from 80px */
+    height: 70px; /* Reduced from 80px */
+    top: 35px; /* Adjusted for smaller icon (70px - 35px for half overlap) */
+  }
+  
+  .username {
+    font-size: 18px;
+  }
+  
+  .link-button {
+    padding: 10px 14px;
+    font-size: 13px;
+    min-height: 44px;
+  }
+  
+  /* Discord link extra small screen adjustments */
+  .discord-link {
+    padding: 6px 10px !important;
+    gap: 8px !important;
+  }
+  
+  .discord-avatar {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .bot-badge {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(30, 64, 175, 0.3);
+    bottom: -22px;
+  }
+  
+  .discord-username {
+    font-size: 13px;
+  }
+  
+  .discord-badge {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .discord-badge svg {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .discord-description {
+    font-size: 10px;
+  }
+  
+  .discord-button {
+    padding: 3px 6px;
+    font-size: 9px;
+  }
+  
+  /* Instagram dropdown extra small screen adjustments */
+  .dropdown-item {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+  
+  /* Spotify extra small screen adjustments */
+  .spotify-link {
+    padding: 6px 10px !important;
+    gap: 8px !important;
+  }
+  
+  .spotify-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .spotify-username {
+    font-size: 13px;
+  }
+  
+  .spotify-description {
+    font-size: 10px;
+  }
+  
+  .spotify-button {
+    padding: 3px 6px;
+    font-size: 9px;
+  }
+  
+  .card {
+    height: 90px;
+  }
+  
+  .card .one {
+    padding: 12px;
+  }
+  
+  .card .one .music {
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
+  }
+  
+  .card .one .name {
+    font-size: 13px;
+  }
+  
+  .card .one .name1 {
+    font-size: 11px;
+  }
+} 
+
+/* Instagram Dropdown Styles */
+.instagram-dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(30, 64, 175, 0.3);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  border-radius: 6px;
+  margin-top: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 30;
+  overflow: hidden;
+}
+
+.instagram-dropdown-container:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 16px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(147, 197, 253, 0.2);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: rgba(147, 197, 253, 0.1);
+  color: rgba(255, 255, 255, 1);
+}
+
+/* Spotify Link Styling - uses existing link-button base */
+.spotify-link {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start !important;
+  gap: 12px;
+  padding: 12px 16px !important;
+}
+
+.spotify-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.spotify-link:hover .spotify-icon {
+  transform: scale(1.1);
+}
+
+.spotify-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1db954;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.spotify-status-dot.playing {
+  opacity: 1;
+}
+
+.spotify-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.spotify-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.spotify-username {
+  font-size: 16px;
+  font-weight: 525;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.spotify-badges {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.spotify-badge {
+  font-size: 12px;
+}
+
+.spotify-description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotify-button {
+  background: rgba(147, 197, 253, 0.2);
+  border: 1px solid rgba(147, 197, 253, 0.4);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  backdrop-filter: blur(4px);
+}
+
+.spotify-link:hover .spotify-button {
+  background: rgba(147, 197, 253, 0.3);
+  border: 1px solid rgba(147, 197, 253, 0.6);
+  transform: scale(1.05);
+} 
