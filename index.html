@@ -139,6 +139,7 @@
                         <div class="progress-container">
                             <div class="progress-bar">
                                 <div class="progress-fill" id="progressFill"></div>
+                                <div class="progress-buffered" id="progressBuffered"></div>
                             </div>
                             <div class="time-display">
                                 <span id="currentTime">0:00</span>
@@ -193,6 +194,20 @@
             d="M15.596 7.304a.802.802 0 0 1 0 1.392l-6.363 3.692C8.713 12.69 8 12.345 8 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692Z"
           ></path>
         </svg>
+        <!-- Volume Control -->
+        <div class="volume-container">
+            <svg viewBox="0 0 16 16" class="volume-icon" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" id="volumeIcon">
+                <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+                <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+                <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>
+            </svg>
+            <div class="volume-slider">
+                <input type="range" id="volumeSlider" min="0" max="100" value="100" class="volume-input">
+                <div class="volume-track">
+                    <div class="volume-fill" id="volumeFill"></div>
+                </div>
+            </div>
+        </div>
       </div>
                         
       </div>
@@ -204,7 +219,7 @@
     </div>
 
     <!-- Audio element -->
-    <audio id="audioPlayer" preload="auto" autoplay>
+    <audio id="audioPlayer" preload="metadata" crossorigin="anonymous">
         <source src="uzi.m4a" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -213,6 +228,7 @@
         const audio = document.getElementById('audioPlayer');
         const playPauseBtn = document.getElementById('playPauseBtn');
         const progressFill = document.getElementById('progressFill');
+        const progressBuffered = document.getElementById('progressBuffered');
         const currentTimeSpan = document.getElementById('currentTime');
         const totalTimeSpan = document.getElementById('totalTime');
         const progressBar = document.querySelector('.progress-bar');
@@ -220,6 +236,9 @@
         const nextBtn = document.getElementById('nextBtn');
         const currentTrackName = document.getElementById('currentTrackName');
         const currentArtistName = document.getElementById('currentArtistName');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeFill = document.getElementById('volumeFill');
+        const volumeIcon = document.getElementById('volumeIcon');
 
         let isPlaying = false;
 
@@ -255,11 +274,22 @@
             isPlaying = !isPlaying;
         });
 
-        // Update progress bar
+        // Update progress bar and buffered progress
         audio.addEventListener('timeupdate', () => {
             const progress = (audio.currentTime / audio.duration) * 100;
             progressFill.style.width = progress + '%';
             currentTimeSpan.textContent = formatTime(audio.currentTime);
+        });
+
+        // Update buffered progress for better mobile experience
+        audio.addEventListener('progress', () => {
+            if (audio.duration > 0) {
+                const buffered = audio.buffered;
+                if (buffered.length > 0) {
+                    const bufferedProgress = (buffered.end(buffered.length - 1) / audio.duration) * 100;
+                    progressBuffered.style.width = bufferedProgress + '%';
+                }
+            }
         });
 
         // Set total duration and update currently playing info
@@ -284,13 +314,49 @@
             }
         });
 
-        // Click on progress bar to seek
+        // Click on progress bar to seek (improved for mobile)
         progressBar.addEventListener('click', (e) => {
             const rect = progressBar.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
             const width = rect.width;
             const newTime = (clickX / width) * audio.duration;
+            
+            // Show loading state while seeking
+            progressBar.style.cursor = 'wait';
+            
             audio.currentTime = newTime;
+            
+            // Wait for seeking to complete
+            const handleSeeked = () => {
+                progressBar.style.cursor = 'pointer';
+                audio.removeEventListener('seeked', handleSeeked);
+            };
+            
+            audio.addEventListener('seeked', handleSeeked);
+        });
+
+        // Add touch support for mobile devices
+        progressBar.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+        });
+
+        progressBar.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            const rect = progressBar.getBoundingClientRect();
+            const touch = e.changedTouches[0];
+            const clickX = touch.clientX - rect.left;
+            const width = rect.width;
+            const newTime = (clickX / width) * audio.duration;
+            
+            progressBar.style.cursor = 'wait';
+            audio.currentTime = newTime;
+            
+            const handleSeeked = () => {
+                progressBar.style.cursor = 'pointer';
+                audio.removeEventListener('seeked', handleSeeked);
+            };
+            
+            audio.addEventListener('seeked', handleSeeked);
         });
 
         // Previous button (restart current song)
@@ -315,9 +381,98 @@
             }
         });
 
+        // Add buffering and loading event listeners for mobile optimization
+        audio.addEventListener('waiting', () => {
+            // Show loading state when buffering
+            playPauseBtn.style.opacity = '0.5';
+        });
+
+        audio.addEventListener('canplay', () => {
+            // Hide loading state when ready to play
+            playPauseBtn.style.opacity = '1';
+        });
+
+        audio.addEventListener('loadstart', () => {
+            console.log('Audio loading started');
+        });
+
+        audio.addEventListener('canplaythrough', () => {
+            console.log('Audio can play through without interruption');
+        });
+
+        // Error handling for mobile devices
+        audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+            playPauseBtn.style.opacity = '1';
+        });
+
+        audio.addEventListener('stalled', () => {
+            console.log('Audio download stalled');
+        });
+
+        // Volume control functionality
+        if (volumeSlider && volumeFill && volumeIcon) {
+            // Use both 'input' and 'change' events for smoother interaction
+            const updateVolume = () => {
+                const volume = volumeSlider.value;
+                audio.volume = volume / 100;
+                
+                // Use requestAnimationFrame for smooth visual updates
+                requestAnimationFrame(() => {
+                    volumeFill.style.width = volume + '%';
+                    updateVolumeIcon(volume);
+                });
+            };
+            
+            volumeSlider.addEventListener('input', updateVolume);
+            volumeSlider.addEventListener('change', updateVolume);
+            
+            // Prevent any dragging issues on mobile
+            volumeSlider.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+            });
+            
+            volumeSlider.addEventListener('touchmove', (e) => {
+                e.stopPropagation();
+                updateVolume();
+            });
+        }
+
+        // Update volume icon based on volume level
+        function updateVolumeIcon(volume) {
+            if (volume == 0) {
+                // Muted icon
+                volumeIcon.innerHTML = '<path d="m10.8 1.88-0.683 0.683L6.717 6.01l0.707 0.707L10.8 3.344A3.12 3.12 0 0 1 12 6c0 0.414-0.067 0.815-0.197 1.183l0.625 0.625A4.13 4.13 0 0 0 12.8 6a4.12 4.12 0 0 0-2-3.12zM11.025 8.47L10.025 7.47c0.185-0.215 0.3-0.494 0.3-0.8a1.5 1.5 0 0 0-0.8-1.325L8.817 5.925A0.5 0.5 0 0 1 8.5 6v4a0.5 0.5 0 0 1-0.383 0.487L5.825 12.5H3.5A0.5 0.5 0 0 1 3 12V8a0.5 0.5 0 0 1 0.5-0.5h1.57l0.647-0.518-0.707-0.707L3.5 7.5A1.5 1.5 0 0 0 2 9v3a1.5 1.5 0 0 0 1.5 1.5h2.797l2.703 2.162A1.5 1.5 0 0 0 11.5 14.5V10.207l-0.475-0.475V8.47z"/><path d="m13.854 5.646-1.414 1.414L14.086 8.707l-1.646 1.647 1.414 1.414L15.5 10.121l1.646 1.647 1.414-1.414L16.914 8.707l1.646-1.647-1.414-1.414L15.5 7.293 13.854 5.646z"/>';
+                volumeIcon.style.color = 'rgba(255, 255, 255, 0.5)';
+            } else if (volume < 33) {
+                // Low volume icon
+                volumeIcon.innerHTML = '<path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>';
+                volumeIcon.style.color = 'rgba(255, 255, 255, 0.9)';
+            } else if (volume < 66) {
+                // Medium volume icon
+                volumeIcon.innerHTML = '<path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>';
+                volumeIcon.style.color = 'rgba(255, 255, 255, 0.9)';
+            } else {
+                // High volume icon (original)
+                volumeIcon.innerHTML = '<path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/><path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/><path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>';
+                volumeIcon.style.color = 'rgba(255, 255, 255, 0.9)';
+            }
+        }
+
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', () => {
             initializeAudioPlayer();
+            
+            // Set initial volume if volume controls exist
+            if (volumeSlider && volumeFill && volumeIcon) {
+                audio.volume = 1.0; // Set default volume to 100%
+                volumeSlider.value = 100;
+                volumeFill.style.width = '100%';
+                updateVolumeIcon(100);
+                console.log('Volume controls initialized');
+            } else {
+                console.error('Volume controls not found');
+            }
         });
 
         // Link button click tracking
